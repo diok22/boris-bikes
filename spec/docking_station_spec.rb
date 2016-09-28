@@ -17,4 +17,11 @@ describe DockingStation do
     expect(Bike.new).to respond_to(:working?)
   end
 
+  it "accepts bike if docking station not full" do
+    bike = Bike.new
+    expect(subject.dock(bike)).to eq bike
+  end
+
+  it { is_expected.to respond_to(:dock).with(1).argument }
+
 end
