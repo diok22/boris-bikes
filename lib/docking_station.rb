@@ -4,7 +4,8 @@ class DockingStation
 
   DEFAULT_CAPACITY = 20
 
-    def initialize
+    def initialize(capacity=DEFAULT_CAPACITY)
+      @capacity = capacity
       @bike = []
     end
 
@@ -22,7 +23,7 @@ class DockingStation
     private
 
     def full?
-      @bike.length == DEFAULT_CAPACITY
+      @bike.length == @capacity
     end
 
     def empty?
