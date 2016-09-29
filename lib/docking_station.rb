@@ -8,13 +8,12 @@ class DockingStation
       if @bike == nil
         raise "No bike available"
       else
-        @bike
+        remove_instance_variable(:@bike)
       end
     end
 
     def dock(bike)
-    raise "Dock full" if defined? @bike
-    @bike = bike
+      @bike = bike
     end
 
 end
