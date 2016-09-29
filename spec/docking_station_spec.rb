@@ -7,9 +7,9 @@ describe DockingStation do
       expect(docking_station.class).to eq DockingStation
   end
 
-  it "release bike method creates an instance of the class" do
-    expect(subject.release_bike).to be_instance_of Bike
-  end
+  # it "release bike method creates an instance of the class" do
+  #   expect(subject.release_bike).to be_instance_of Bike
+  # end
 
   it { is_expected.to respond_to(:release_bike) }
 
@@ -23,5 +23,9 @@ describe DockingStation do
   end
 
   it { is_expected.to respond_to(:dock).with(1).argument }
+
+  it "prints out an error if no bike is currently on the station" do
+    expect { docking_station.release_bike }.to raise_error("No bike available")
+  end
 
 end
