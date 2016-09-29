@@ -28,11 +28,18 @@ describe DockingStation do
     expect { docking_station.release_bike }.to raise_error("No bike available")
   end
 
-  it "prints out an error if dock is full" do
-    bike_1=Bike.new
-    docking_station.dock(bike_1)
-    bike_2=Bike.new
-    expect {docking_station.dock(bike_2)}.to raise_error("Dock full")
+  # it "prints out an error if dock is full" do
+  #   bike_1=Bike.new
+  #   docking_station.dock(bike_1)
+  #   bike_2=Bike.new
+  #   expect {docking_station.dock(bike_2)}.to raise_error("Dock full")
+  # end
+
+  it "docking station accepts up to 20 bikes" do
+    20.times do
+      docking_station.dock(Bike.new)
+    end
+    expect { docking_station.dock(Bike.new) }.to raise_error("Dock full")
   end
 
 end

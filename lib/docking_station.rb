@@ -2,18 +2,28 @@ require_relative 'bike.rb'
 
 class DockingStation
 
+  def initialize(size=20)
+    @size = size
+    @bike = []
+  end
+
   attr_reader :bike
 
     def release_bike
-      if @bike == nil
+      if @bike.empty?
         raise "No bike available"
       else
-        remove_instance_variable(:@bike)
+        @bike.pop
       end
     end
 
     def dock(bike)
-      @bike = bike
+
+      if @bike.length == @size
+        raise "Dock full"
+      else
+          @bike << bike
+      end
     end
 
 end
