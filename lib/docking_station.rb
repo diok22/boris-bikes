@@ -2,7 +2,7 @@ require_relative 'bike.rb'
 
 class DockingStation
 
-  def initialize(size=20)
+  def initialize(size=3)
     @size = size
     @bike = []
   end
@@ -10,20 +10,23 @@ class DockingStation
   attr_reader :bike
 
     def release_bike
-      if @bike.empty?
-        raise "No bike available"
-      else
-        @bike.pop
-      end
+      raise "No bike available"  if empty?
+      @bike.pop
     end
 
     def dock(bike)
+      raise "Dock full" if full?
+      @bike << bike
+    end
 
-      if @bike.length == @size
-        raise "Dock full"
-      else
-          @bike << bike
-      end
+    private
+
+    def full?
+      @bike.length == @size
+    end
+
+    def empty?
+      @bike.length == 0
     end
 
 end
