@@ -4,31 +4,36 @@ class DockingStation
 
   DEFAULT_CAPACITY = 20
 
-attr_reader :bikes
-attr_reader :capacity
+attr_reader :working_bikes, :broken_bikes, :capacity
 
   def initialize(capacity=DEFAULT_CAPACITY)
-    @bikes = []
+    @working_bikes = []
+    @broken_bikes = []
     @capacity = capacity
   end
 
   def release_bike
     fail 'No bikes' if empty?
-    @bikes.pop
+    if @working_bikes.length == 0
+      "No working bikes"
+    else
+    @working_bikes.pop
+    end
   end
 
   def dock(bike)
     fail 'Docking station full' if full?
-    @bikes << bike
     if bike.working == true
+      @working_bikes << bike
       "Working bike"
     elsif bike.working == false
+      @broken_bikes << bike
       "Broken bike"
     end
   end
 
   def count_bikes #this seems to have worked! Try this on irb!
-    @bikes.count
+    @working_bikes.count + @broken_bikes.count
   end
 
 private
@@ -36,12 +41,12 @@ private
 
 
   def full?
-    @bikes.count >= @capacity
+    @working_bikes.count + @broken_bikes.count >= @capacity
   end
 
 
   def empty?
-    @bikes.count == 0
+    @working_bikes.count + @broken_bikes.count == 0
   end
 end
 
